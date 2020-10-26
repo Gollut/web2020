@@ -1,0 +1,162 @@
+html {
+  font-size: 16px;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  color: #718287;
+}
+
+.section {
+  padding: 1rem 0;
+}
+
+.section .heading-section {
+  position: relative;
+  margin: 0 3rem 2rem 3rem;
+  display: flex;
+}
+
+.section .section-title {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 200;
+  text-align: center;
+}
+
+.section-local .refresh {
+  position: absolute;
+  align-self: center;
+  left: 50%;
+  transform: translate(-50%, 0);
+  border-radius: .2rem;
+  border: none;
+  font-weight: 400;
+  font-size: .8rem;
+  background-color: #c9d2d7;
+  color: #8e999f;
+  padding: 1rem 2.5rem;
+  outline: none;
+}
+
+.section-local .refresh.icon {
+  display: none;
+}
+
+.local-weather {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1 1;
+}
+
+.local-weather .icon {
+  margin: 0;
+  height: 10rem;
+}
+
+.card {
+  width: 50%;
+  font-family: sans-serif;
+  padding: 1.5rem 3rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.card .heading {
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+
+.local-weather .temperature {
+  font-size: 8rem;
+}
+
+.section-favorites .add-city {
+  position: absolute;
+  right: 0;
+}
+
+.add-city input {
+  border: none;
+  background-color: #f1f1f1;
+  border-radius: .1rem;
+  padding: 1rem;
+  font-size: 1rem;
+  outline: none;
+}
+
+.add-city button {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: none;
+  outline: none;
+  margin-bottom: .5rem;
+  border-radius: 50%;
+  margin-left: .5rem;
+  background: url("resources/add.svg") no-repeat center, #9ca4a9;
+  background-size: 1.5rem;
+}
+
+.section-content {
+  display: flex;
+  position: relative;
+  flex-wrap: wrap;
+}
+
+.city {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.city.main-city {
+  font-size: 2.5rem;
+}
+
+.temperature {
+  font-size: 2.5rem;
+  margin-left: 3rem;
+  color: #75757a;
+}
+
+.icon {
+  height: 3rem;
+  margin-left: 2rem;
+}
+
+.remove {
+  position: absolute;
+  border: none;
+  outline: none;
+  right: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: url("resources/remove.svg") no-repeat center, #9ca4a9;
+  background-size: 1rem;
+}
+
+.attrs-list {
+  list-style: none;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+.attrs-list > li {
+  width: 100%;
+  background-color: #9ca4a9;
+  color: white;
+  margin: .5rem 0;
+  display: flex;
+  justify-content: space-between;
+  padding: .7rem;
+  box-sizing: border-box;
+}
+
+.attrs-list > li .name {
+  font-weight: 700;
+}

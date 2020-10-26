@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css"/>
+    <title>Погода</title>
+  </head>
+
+  <body>
+    <section class="section section-local">
+      <div class="heading-section">
+        <h2 class="section-title">Погода здесь</h2>
+        <button class="refresh">Обновить геолокацию</button>
+      </div>
+
+      <div class="section-content">
+        <div class="card weather-main">
+          <div class="heading">
+            <h3 class="city main-city">Saint Petersburg</h3>
+          </div>
+
+          <div class="local-weather">
+            <img class="icon" src="resources/weather.svg" alt="Погода">
+            <div class="temperature">
+              8°C
+            </div>
+          </div>  
+        </div>
+
+        <div class="card">
+          <ul class="attrs-list">
+            <li>
+              <div class="name">Ветер</div>
+              <div class="value">6.0 m/s, North-northwest</div>
+            </li>
+            <li>
+              <div class="name">Облачность</div>
+              <div class="value">30 %</div>
+            </li>
+            <li>
+              <div class="name">Давление</div>
+              <div class="value">1013 hpa</div>
+            </li>
+            <li>
+              <div class="name">Влажность</div>
+              <div class="value">52 %</div>
+            </li>
+            <li>
+              <div class="name">Координаты</div>
+              <div class="value">[59.88, 30.42]</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section class="section section-favorites">
+      <div class="heading-section">
+        <h2 class="section-title">Избранное</h2>
+        <form class="add-city">
+            <label>
+                <input type="text" placeholder="Добавить город" size="30">
+            </label>
+            <button></button>
+        </form>
+      </div>
+
+      <div class="section-content">
+        <div class="card">
+          <div class="heading">
+            <h3 class="city">Moscow</h3>
+            <div class="temperature">5°C</div>
+            <img class="icon" src="resources/weather.svg" alt="Погода">
+            <button class="remove"></button>
+          </div>
+
+          <ul class="attrs-list">
+            <li>
+              <div class="name">Ветер</div>
+              <div class="value">Moderate breeze, 6.0 m/s, North-northwest</div>
+            </li>
+            <li>
+              <div class="name">Облачность</div>
+              <div class="value">Broken clouds</div>
+            </li>
+            <li>
+              <div class="name">Давление</div>
+              <div class="value">1013 hpa</div>
+            </li>
+            <li>
+              <div class="name">Влажность</div>
+              <div class="value">Broken clouds</div>
+            </li>
+            <li>
+              <div class="name">Координаты</div>
+              <div class="value">[59.88, 30.42]</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="heading">
+            <h3 class="city">Helsinki</h3>
+            <div class="temperature">5°C</div>
+            <img class="icon" src="resources/weather.svg" alt="Погода">
+            <button class="icon remove"></button>
+          </div>
+
+          <ul class="attrs-list">
+            <li>
+              <div class="name">Ветер</div>
+              <div class="value">Moderate breeze, 6.0 m/s, North-northwest</div>
+            </li>
+
+            <li>
+              <div class="name">Облачность</div>
+              <div class="value">Broken clouds</div>
+            </li>
+
+            <li>
+              <div class="name">Давление</div>
+              <div class="value">1013 hpa</div>
+            </li>
+
+            <li>
+              <div class="name">Влажность</div>
+              <div class="value">Broken clouds</div>
+            </li>
+
+            <li>
+              <div class="name">Координаты</div>
+              <div class="value">[59.88, 30.42]</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="heading">
+            <h3 class="city">Moscow</h3>
+            <div class="temperature">5°C</div>
+            <img class="icon" src="resources/weather.svg" alt="Погода">
+            <button class="remove"></button>
+          </div>
+
+          <ul class="attrs-list">
+            <li>
+              <div class="name">Ветер</div>
+              <div class="value">Moderate breeze, 6.0 m/s, North-northwest</div>
+            </li>
+
+            <li>
+              <div class="name">Облачность</div>
+              <div class="value">Broken clouds</div>
+            </li>
+
+            <li>
+              <div class="name">Давление</div>
+              <div class="value">1013 hpa</div>
+            </li>
+
+            <li>
+              <div class="name">Влажность</div>
+              <div class="value">Broken clouds</div>
+            </li>
+
+            <li>
+              <div class="name">Координаты</div>
+              <div class="value">[59.88, 30.42]</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="heading">
+            <h3 class="city">Helsinki</h3>
+            <div class="temperature">5°C</div>
+            <img class="icon" src="resources/weather.svg" alt="Погода">
+            <button class="remove"></button>
+          </div>
+
+          <ul class="attrs-list">
+            <li>
+              <div class="name">Ветер</div>
+              <div class="value">Moderate breeze, 6.0 m/s, North-northwest</div>
+            </li>
+
+            <li>
+              <div class="name">Облачность</div>
+              <div class="value">Broken clouds</div>
+            </li>
+
+            <li>
+              <div class="name">Давление</div>
+              <div class="value">1013 hpa</div>
+            </li>
+
+            <li>
+              <div class="name">Влажность</div>
+              <div class="value">Broken clouds</div>
+            </li>
+
+            <li>
+              <div class="name">Координаты</div>
+              <div class="value">[59.88, 30.42]</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="heading">
+            <h3 class="city">Moscow</h3>
+            <div class="temperature">5°C</div>
+            <img class="icon" src="resources/weather.svg" alt="Погода">
+            <button class="remove"></button>
+          </div>
+
+          <ul class="attrs-list">
+            <li>
+              <div class="name">Ветер</div>
+              <div class="value">Moderate breeze, 6.0 m/s, North-northwest</div>
+            </li>
+            <li>
+              <div class="name">Облачность</div>
+              <div class="value">Broken clouds</div>
+            </li>
+            <li>
+              <div class="name">Давление</div>
+              <div class="value">1013 hpa</div>
+            </li>
+            <li>
+              <div class="name">Влажность</div>
+              <div class="value">Broken clouds</div>
+            </li>
+            <li>
+              <div class="name">Координаты</div>
+              <div class="value">[59.88, 30.42]</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="heading">
+            <h3 class="city">Helsinki</h3>
+            <div class="temperature">5°C</div>
+            <img class="icon" src="resources/weather.svg" alt="Погода">
+            <button class="remove"></button>
+          </div>
+
+          <ul class="attrs-list">
+            <li>
+              <div class="name">Ветер</div>
+              <div class="value">Moderate breeze, 6.0 m/s, North-northwest</div>
+            </li>
+            <li>
+              <div class="name">Облачность</div>
+              <div class="value">Broken clouds</div>
+            </li>
+            <li>
+              <div class="name">Давление</div>
+              <div class="value">1013 hpa</div>
+            </li>
+            <li>
+              <div class="name">Влажность</div>
+              <div class="value">Broken clouds</div>
+            </li>
+            <li>
+              <div class="name">Координаты</div>
+              <div class="value">[59.88, 30.42]</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </body>
+</html>
