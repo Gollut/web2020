@@ -5,6 +5,7 @@ html {
 body {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   color: #718287;
 }
 
@@ -16,11 +17,14 @@ body {
   position: relative;
   margin: 0 3rem 2rem 3rem;
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  box-sizing: border-box;
 }
 
 .section .section-title {
   margin: 0;
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 200;
   text-align: center;
 }
@@ -40,15 +44,25 @@ body {
   outline: none;
 }
 
-.section-local .refresh.icon {
+.section-local .refresh-icon {
+  position: absolute;
+  align-self: center;
+  left: 50%;
+  transform: translate(-50%, 0);
   display: none;
+  border-radius: 50%;
+  border: none;
+  background: url("resources/refresh.svg") no-repeat center, #c9d2d7;
+  background-size: 2rem;
+  outline: none;
+  height: 4rem;
+  width: 4rem;
 }
 
 .local-weather {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex: 1 1;
 }
 
 .local-weather .icon {
@@ -78,18 +92,21 @@ body {
 .section-favorites .add-city {
   position: absolute;
   right: 0;
+  display: flex;
+  align-items: center;
 }
 
-.add-city input {
+.section-favorites .add-city input {
   border: none;
   background-color: #f1f1f1;
   border-radius: .1rem;
   padding: 1rem;
   font-size: 1rem;
   outline: none;
+  flex: 1 1;
 }
 
-.add-city button {
+.section-favorites .add-city button {
   width: 2.5rem;
   height: 2.5rem;
   border: none;
@@ -159,4 +176,27 @@ body {
 
 .attrs-list > li .name {
   font-weight: 700;
+}
+
+@media screen and (max-width: 900px) {
+  html {
+    font-size: 12px;
+  }
+  .card {
+    width: 100%;
+  }
+
+  .section-favorites .add-city {
+    position: relative;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .section-local .refresh {
+    display: none;
+  }
+
+  .section-local .refresh-icon {
+    display: block;
+  }
 }
