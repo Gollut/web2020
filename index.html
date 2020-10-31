@@ -8,17 +8,18 @@
   </head>
 
   <body>
+  <main>
     <section class="section section-local">
-      <div class="heading-section">
-        <h2 class="section-title">Погода здесь</h2>
+      <section class="heading-section">
+        <h1 class="section-title">Погода здесь</h1>
         <button class="refresh">Обновить геолокацию</button>
         <button class="refresh-icon"></button>
-      </div>
+      </section>
 
-      <div class="section-content">
+      <section class="cards-container">
         <div class="card weather-main">
           <div class="heading">
-            <h3 class="city main-city">Saint Petersburg</h3>
+            <h2 class="city main-city">Saint Petersburg</h2>
           </div>
 
           <div class="local-weather">
@@ -30,7 +31,7 @@
         </div>
 
         <div class="card">
-          <ul class="attrs-list">
+          <ul class="card attrs-list">
             <li>
               <div class="name">Ветер</div>
               <div class="value">6.0 m/s, North-northwest</div>
@@ -53,19 +54,19 @@
             </li>
           </ul>
         </div>
-      </div>
+      </section>
     </section>
     <section class="section section-favorites">
-      <div class="heading-section">
+      <section class="heading-section">
         <h2 class="section-title">Избранное</h2>
         <form class="add-city">
           <input type="text" placeholder="Добавить город" size="30">
           <button class="button-add"></button>
         </form>
-      </div>
+      </section>
 
-      <div class="section-content">
-        <div class="card">
+      <ul class="cards-container">
+        <li class="card">
           <div class="heading">
             <h3 class="city">Moscow</h3>
             <div class="temperature">5°C</div>
@@ -95,9 +96,9 @@
               <div class="value">[59.88, 30.42]</div>
             </li>
           </ul>
-        </div>
+        </li>
 
-        <div class="card">
+        <li class="card">
           <div class="heading">
             <h3 class="city">Helsinki</h3>
             <div class="temperature">5°C</div>
@@ -127,9 +128,9 @@
               <div class="value">[59.88, 30.42]</div>
             </li>
           </ul>
-        </div>
+        </li>
 
-        <div class="card">
+        <li class="card">
           <div class="heading">
             <h3 class="city">Moscow</h3>
             <div class="temperature">5°C</div>
@@ -159,9 +160,9 @@
               <div class="value">[59.88, 30.42]</div>
             </li>
           </ul>
-        </div>
+        </li>
 
-        <div class="card">
+        <li class="card">
           <div class="heading">
             <h3 class="city">Helsinki</h3>
             <div class="temperature">5°C</div>
@@ -191,9 +192,9 @@
               <div class="value">[59.88, 30.42]</div>
             </li>
           </ul>
-        </div>
+        </li>
 
-        <div class="card">
+        <li class="card">
           <div class="heading">
             <h3 class="city">Moscow</h3>
             <div class="temperature">5°C</div>
@@ -223,9 +224,9 @@
               <div class="value">[59.88, 30.42]</div>
             </li>
           </ul>
-        </div>
+        </li>
 
-        <div class="card">
+        <li class="card">
           <div class="heading">
             <h3 class="city">Helsinki</h3>
             <div class="temperature">5°C</div>
@@ -255,9 +256,9 @@
               <div class="value">[59.88, 30.42]</div>
             </li>
           </ul>
-        </div>
-      </div>
+        </li>
+      </ul>
     </section>
-
+  </main>
   </body>
 </html>

@@ -15,7 +15,7 @@ body {
 
 .section .heading-section {
   position: relative;
-  margin: 0 3rem 2rem 3rem;
+  margin: 0 1rem 2rem 1rem;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -55,8 +55,26 @@ body {
   background: url("resources/refresh.svg") no-repeat center, #c9d2d7;
   background-size: 2rem;
   outline: none;
-  height: 4rem;
-  width: 4rem;
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+.loader {
+  position: absolute;
+  align-self: center;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.loader {
+  display: none;
+  width: 100%;
+  font-size: 5rem;
+  text-align: center;
+}
+
+.section.loading .loader {
+  display: block;
 }
 
 .local-weather {
@@ -73,10 +91,17 @@ body {
 .card {
   width: 50%;
   font-family: sans-serif;
-  padding: 1.5rem 3rem;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+}
+
+.card:nth-child(2n) {
+  padding: 1.5rem 1rem 1.5rem 2rem;
+}
+
+.card:nth-child(2n-1) {
+  padding: 1.5rem 2rem 1.5rem 1rem;
 }
 
 .card .heading {
@@ -113,12 +138,12 @@ body {
   outline: none;
   margin-bottom: .5rem;
   border-radius: 50%;
-  margin-left: .5rem;
+  margin-left: 2rem;
   background: url("resources/add.svg") no-repeat center, #9ca4a9;
   background-size: 1.5rem;
 }
 
-.section-content {
+.cards-container {
   display: flex;
   position: relative;
   flex-wrap: wrap;
@@ -156,9 +181,17 @@ body {
   background-size: 1rem;
 }
 
+.card > .attrs-list {
+  margin: 0;
+  padding: 0;
+}
+
 .attrs-list {
   list-style: none;
   position: relative;
+}
+
+.cards-container {
   margin: 0;
   padding: 0;
 }
@@ -184,6 +217,13 @@ body {
   }
   .card {
     width: 100%;
+    padding: 1.5rem 0 !important;
+  }
+
+  .section .heading-section {
+    position: relative;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   .section-favorites .add-city {
