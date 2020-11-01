@@ -64,13 +64,7 @@ body {
   align-self: center;
   left: 50%;
   transform: translate(-50%, 0);
-}
-
-.loader {
   display: none;
-  width: 100%;
-  font-size: 5rem;
-  text-align: center;
 }
 
 .section.loading .loader {

@@ -9,7 +9,7 @@
 
   <body>
   <main>
-    <section id="localWeather" class="section section-local loading">
+    <section id="localWeather" class="section section-local">
       <section class="heading-section">
         <h1 class="section-title">Погода здесь</h1>
         <button id="refresh" class="refresh">Обновить геолокацию</button>
@@ -35,7 +35,56 @@
         </div>
 
         <div class="card">
-          <ul class="card attrs-list">
+        <ul class="attrs-list">
+            <li>
+              <div class="name">Ветер</div>
+              <div class="value">
+                <span class="wind-speed">6.0</span> m/s, <span class="wind-direction">North-northwest</span>
+              </div>
+            </li>
+            <li>
+              <div class="name">Облачность</div>
+              <div class="value"><span class="cloudness">30</span>%</div>
+            </li>
+            <li>
+              <div class="name">Давление</div>
+              <div class="value"><span class="pressure">1013</span> hpa</div>
+            </li>
+            <li>
+              <div class="name">Влажность</div>
+              <div class="value"><span class="humidity">52</span>%</div>
+            </li>
+            <li>
+              <div class="name">Координаты</div>
+              <div class="value">[<span class="coords-lat">59.88</span>, <span class="coords-lon">30.42</span>]</div>
+            </li>
+        </ul>
+        </div>
+      </section>
+    </section>
+    <section class="section section-favorites">
+      <section class="heading-section">
+        <h2 class="section-title">Избранное</h2>
+        <form class="add-city">
+          <input type="text" name="city" placeholder="Добавить город" size="30">
+          <button class="button-add"></button>
+        </form>
+      </section>
+
+      <ul id="favoriteCards" class="cards-container">
+      </ul>
+
+      <template id="favoriteCity">
+        <div class="card">
+          <div class="heading">
+            <h3 class="city">Moscow</h3>
+            <div class="temperature">
+              <span class="value">8</span>°C
+            </div>
+            <img class="icon" src="resources/weather.svg" alt="Погода">
+            <button class="remove"></button>
+          </div>
+          <ul class="attrs-list">
             <li>
               <div class="name">Ветер</div>
               <div class="value">
@@ -60,19 +109,7 @@
             </li>
           </ul>
         </div>
-      </section>
-    </section>
-    <section class="section section-favorites">
-      <section class="heading-section">
-        <h2 class="section-title">Избранное</h2>
-        <form class="add-city">
-          <input type="text" name="city" placeholder="Добавить город" size="30">
-          <button class="button-add"></button>
-        </form>
-      </section>
-
-      <ul id="favoriteCards" class="cards-container">
-      </ul>
+      </template>
 
     </section>
     <script src="./script.js"></script>
