@@ -67,8 +67,35 @@ body {
   display: none;
 }
 
+.notification {
+  position: fixed;
+  right: 2rem;
+  top: 5%;
+  border-radius: .2rem;
+  border: none;
+  font-size: .8rem;
+  padding: 1rem 2.5rem;
+  outline: none;
+  z-index: 1000;
+}
+
+.hidden {
+  display: none;
+}
+
+.error {
+  padding: .5rem;
+  background-color: #cb4d47;
+  color: white;
+}
+
 .section.loading .loader {
   display: block;
+}
+
+ul.loading .loader {
+  display: block;
+  top: 0;
 }
 
 .local-weather {

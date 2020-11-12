@@ -9,11 +9,14 @@
 
   <body>
   <main>
-    <section id="localWeather" class="section section-local">
+    <section id="localWeather" class="section section-local loading">
       <section class="heading-section">
         <h1 class="section-title">Погода здесь</h1>
         <button id="refresh" class="refresh">Обновить геолокацию</button>
         <button id="refreshMobile" class="refresh-icon"></button>
+        <div class="notification error hidden" id="notification">
+          Произошла ошибка
+        </div>
       </section>
 
       <div class="loader">
@@ -72,6 +75,9 @@
       </section>
 
       <ul id="favoriteCards" class="cards-container">
+        <div class="loader">
+          Пожалуйста подождите...
+        </div>
       </ul>
 
       <template id="favoriteCity">
