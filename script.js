@@ -4,35 +4,35 @@ let currentCity;
 let favCards = JSON.parse(localStorage.getItem('favorite-cards')) || [];
 
 function handleErrors(response) {
-  console.log(response.ok);
   if (!response.ok) {
     document.getElementById('notification').classList.remove('hidden');
     setTimeout(() => document.getElementById('notification').classList.add('hidden'), 3000)
   }
   return response;
 }
+function catchErrors(e) {
+  document.getElementById('notification').classList.remove('hidden');
+  setTimeout(() => document.getElementById('notification').classList.add('hidden'), 3000)
+}
 function getCurrentLocation() {
   return new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition((location) => resolve(location.coords), reject)
-  })
+  }).catch(e => {
+  });
 }
 
 async function getWeatherByCityName(name) {
   const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lang=ru&units=metric&q=${name}&appid=${API_KEY}`)
-                         .then(handleErrors);
-  return response.json()
-}
-
-async function getWeatherByCityID(id) {
-  const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lang=ru&units=metric&id=${id}&appid=${API_KEY}`)
-                         .then(handleErrors);
-  return response.json()
+      .then(handleErrors)
+      .catch(catchErrors);
+  return response.ok ? response.json() : undefined;
 }
 
 async function getWeatherByCoords(lat, lon) {
   const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lang=ru&units=metric&lat=${lat}&lon=${lon}&appid=${API_KEY}`)
-                         .then(handleErrors);
-  return response.json()
+      .then(handleErrors)
+      .catch(catchErrors);
+  return response.ok ? response.json() : undefined;
 }
 
 function setWeather(el, weather) {
@@ -48,15 +48,15 @@ function setWeather(el, weather) {
   el.querySelector('.coords-lon').textContent = weather.coord.lon;
 }
 
-function removeCity(id) {
+function removeCity(name) {
   const favCardsEl = document.getElementById('favoriteCards');
-  const city = favCardsEl.querySelector(`.card[data-city-id="${id}"]`);
+  const city = favCardsEl.querySelector(`.card[data-city-name="${name}"]`);
 
   if (city !== null) {
     favCardsEl.removeChild(city);
   }
   
-  const idx = favCards.indexOf(id);
+  const idx = favCards.indexOf(name);
   if (idx !== -1) {
     favCards.splice(idx, 1);
     localStorage.setItem('favorite-cards', JSON.stringify(favCards));
@@ -64,51 +64,54 @@ function removeCity(id) {
 }
 
 async function addCity(name) {
-  try {
-    if (name.length > 0) {
+  if (name.length > 0) {
+    if (!favCards.includes(name)) {
       const favContainer = document.getElementById('favoriteCards');
       favContainer.classList.add('loading');
       const weather = await getWeatherByCityName(name);
-      if (!favCards.includes(weather.id)) {
+      if (weather) {
         const template = document.getElementById('favoriteCity');
 
         const city = document.importNode(template.content, true);
 
         const el = city.children[0];
-        el.setAttribute('data-city-id', weather.id);
+        el.setAttribute('data-city-name', weather.name);
         el.querySelector('.remove')
-            .addEventListener('click', e => removeCity(weather.id));
+            .addEventListener('click', e => removeCity(weather.name));
 
-        favContainer.classList.remove('loading');
         setWeather(el, weather);
 
         favContainer.appendChild(city);
-        favCards.push(weather.id);
+        favCards.push(weather.name);
         localStorage.setItem('favorite-cards', JSON.stringify(favCards));
       }
+      document.getElementsByName('city')[0].value = '';
+      favContainer.classList.remove('loading');
     }
-  } catch (e) {
-    console.error(e);
+    else {
+      alert('Город уже был добавлен');
+    }
   }
 }
 
-async function loadCity(id) {
+async function loadCity(name) {
   const favContainer = document.getElementById('favoriteCards');
   const template = document.getElementById('favoriteCity');
   favContainer.classList.add('loading');
-  const weather = await getWeatherByCityID(id);
+  const weather = await getWeatherByCityName(name);
+  if (weather) {
+    const city = document.importNode(template.content, true);
 
-  const city = document.importNode(template.content, true);
+    const el = city.children[0];
 
-  const el = city.children[0];
+    el.setAttribute('data-city-id', weather.name);
+    el.querySelector('.remove')
+        .addEventListener('click', e => removeCity(weather.name));
 
-  el.setAttribute('data-city-id', weather.id);
-  el.querySelector('.remove')
-    .addEventListener('click', e => removeCity(weather.id));
-
-  setWeather(el, weather);
+    setWeather(el, weather);
+    favContainer.appendChild(city);
+  }
   favContainer.classList.remove('loading');
-  favContainer.appendChild(city);
 }
 
 async function updateLocalWeather() {
@@ -117,21 +120,19 @@ async function updateLocalWeather() {
   let weather;
   if (currentCity !== undefined) {
     localWeather.classList.add('loading');
-    weather = await getWeatherByCityID(currentCity);
+    weather = await getWeatherByCityName(currentCity);
   } else {
-    localWeather.classList.add('loading');
-    weather = await getWeatherByCityName('Санкт Петербург');
-    localWeather.classList.remove('loading');
-    setWeather(localWeather, weather);
-
     const coords = await getCurrentLocation();
-    localWeather.classList.add('loading');
-    weather = await getWeatherByCoords(coords.latitude, coords.longitude)
+    if (coords) {
+      localWeather.classList.add('loading');
+      weather = await getWeatherByCoords(coords.latitude, coords.longitude);
+    }
   }
 
-  currentCity = weather.id;
-  setWeather(localWeather, weather);
-
+  if (weather) {
+    currentCity = weather.name;
+    setWeather(localWeather, weather);
+  }
   localWeather.classList.remove('loading')
 }
 
@@ -145,5 +146,5 @@ window.addEventListener('load', async () => {
       addCity(e.target.elements['city'].value)
     });
 
-  favCards.forEach(id => loadCity(id));
+  favCards.forEach(name => loadCity(name));
 });
