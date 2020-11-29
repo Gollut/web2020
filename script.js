@@ -1,8 +1,7 @@
-const API_KEY = '12ff3d16a192c591a72def9a9eb00dd0';
-
 let currentCity;
-let favCards = JSON.parse(localStorage.getItem('favorite-cards')) || [];
-
+let API_TOKEN = 'test';
+let API_HOST = 'http://localhost:8081';
+let favCards = [];
 function handleErrors(response) {
   if (!response.ok) {
     document.getElementById('notification').classList.remove('hidden');
@@ -22,18 +21,44 @@ function getCurrentLocation() {
 }
 
 async function getWeatherByCityName(name) {
-  const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lang=ru&units=metric&q=${name}&appid=${API_KEY}`)
+  const response = await fetch(`${API_HOST}/weather/city?q=${name}`)
       .then(handleErrors)
       .catch(catchErrors);
   return response.ok ? response.json() : undefined;
 }
 
 async function getWeatherByCoords(lat, lon) {
-  const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lang=ru&units=metric&lat=${lat}&lon=${lon}&appid=${API_KEY}`)
+  const response = await fetch(`${API_HOST}/weather/coordinates?lat=${lat}&lon=${lon}&api_token=${API_TOKEN}`)
       .then(handleErrors)
       .catch(catchErrors);
   return response.ok ? response.json() : undefined;
 }
+
+async function getFavCities() {
+  const response = await fetch(`${API_HOST}/favourites?api_token=${API_TOKEN}`)
+      .then(handleErrors)
+      .catch(catchErrors);
+  return response.ok ? response.json() : undefined;
+}
+
+async function addFavCity(city) {
+  const response = await fetch(`${API_HOST}/favourites?city=${city}&api_token=${API_TOKEN}`, {
+    method: 'POST'
+  })
+      .then(handleErrors)
+      .catch(catchErrors);
+  return response.ok ? response.json() : undefined;
+}
+
+async function deleteFavCity(city) {
+  const response = await fetch(`${API_HOST}/favourites?city=${city}&api_token=${API_TOKEN}`, {
+    method: 'DELETE'
+  })
+      .then(handleErrors)
+      .catch(catchErrors);
+  return response.ok ? response.json() : undefined;
+}
+
 
 function setWeather(el, weather) {
   el.querySelector('.heading .city').textContent = weather.name;
@@ -48,18 +73,18 @@ function setWeather(el, weather) {
   el.querySelector('.coords-lon').textContent = weather.coord.lon;
 }
 
-function removeCity(name) {
+async function removeCity(name) {
   const favCardsEl = document.getElementById('favoriteCards');
   const city = favCardsEl.querySelector(`.card[data-city-name="${name}"]`);
-
+  console.log(city);
   if (city !== null) {
     favCardsEl.removeChild(city);
+    await deleteFavCity(name);
   }
   
   const idx = favCards.indexOf(name);
   if (idx !== -1) {
     favCards.splice(idx, 1);
-    localStorage.setItem('favorite-cards', JSON.stringify(favCards));
   }
 }
 
@@ -75,15 +100,14 @@ async function addCity(name) {
         const city = document.importNode(template.content, true);
 
         const el = city.children[0];
-        el.setAttribute('data-city-name', weather.name);
         el.querySelector('.remove')
             .addEventListener('click', e => removeCity(weather.name));
 
         setWeather(el, weather);
 
         favContainer.appendChild(city);
+        await addFavCity(weather.name);
         favCards.push(weather.name);
-        localStorage.setItem('favorite-cards', JSON.stringify(favCards));
       }
       document.getElementsByName('city')[0].value = '';
       favContainer.classList.remove('loading');
@@ -104,7 +128,6 @@ async function loadCity(name) {
 
     const el = city.children[0];
 
-    el.setAttribute('data-city-id', weather.name);
     el.querySelector('.remove')
         .addEventListener('click', e => removeCity(weather.name));
 
@@ -145,6 +168,6 @@ window.addEventListener('load', async () => {
       e.preventDefault();
       addCity(e.target.elements['city'].value)
     });
-
+  favCards = await getFavCities() || [];
   favCards.forEach(name => loadCity(name));
 });
