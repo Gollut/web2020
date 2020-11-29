@@ -128,6 +128,7 @@ async function loadCity(name) {
 
     const el = city.children[0];
 
+    el.setAttribute('data-city-name', weather.name);
     el.querySelector('.remove')
         .addEventListener('click', e => removeCity(weather.name));
 
