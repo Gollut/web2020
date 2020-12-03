@@ -104,7 +104,7 @@ async function addCity(name) {
             .addEventListener('click', e => removeCity(weather.name));
 
         setWeather(el, weather);
-
+        el.setAttribute('data-city-name', weather.name);
         favContainer.appendChild(city);
         await addFavCity(weather.name);
         favCards.push(weather.name);
