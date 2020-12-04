@@ -25,14 +25,14 @@ async function getWeatherByCityName(name) {
   const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lang=ru&units=metric&q=${name}&appid=${API_KEY}`)
       .then(handleErrors)
       .catch(catchErrors);
-  return response.ok ? response.json() : undefined;
+  return response && response.ok ? response.json() : undefined;
 }
 
 async function getWeatherByCoords(lat, lon) {
   const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lang=ru&units=metric&lat=${lat}&lon=${lon}&appid=${API_KEY}`)
       .then(handleErrors)
       .catch(catchErrors);
-  return response.ok ? response.json() : undefined;
+  return response && response.ok ? response.json() : undefined;
 }
 
 function setWeather(el, weather) {
@@ -64,12 +64,12 @@ function removeCity(name) {
 }
 
 async function addCity(name) {
-  if (name.length > 0) {
+  if (name.trim().length > 0) {
     if (!favCards.includes(name)) {
       const favContainer = document.getElementById('favoriteCards');
       favContainer.classList.add('loading');
       const weather = await getWeatherByCityName(name);
-      if (weather) {
+      if (weather && !favCards.includes(weather.name)) {
         const template = document.getElementById('favoriteCity');
 
         const city = document.importNode(template.content, true);
@@ -84,6 +84,9 @@ async function addCity(name) {
         favContainer.appendChild(city);
         favCards.push(weather.name);
         localStorage.setItem('favorite-cards', JSON.stringify(favCards));
+      }
+      else if (weather) {
+        alert('Город уже был добавлен');
       }
       document.getElementsByName('city')[0].value = '';
       favContainer.classList.remove('loading');
