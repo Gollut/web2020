@@ -114,6 +114,7 @@ async function addCity(name) {
     }
     else {
       alert('Город уже был добавлен');
+      document.getElementsByName('city')[0].value = '';
     }
   }
 }
