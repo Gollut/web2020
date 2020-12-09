@@ -89,25 +89,30 @@ async function removeCity(name) {
 }
 
 async function addCity(name) {
-  if (name.length > 0) {
+  if (name.trim().length > 0) {
     if (!favCards.includes(name)) {
       const favContainer = document.getElementById('favoriteCards');
       favContainer.classList.add('loading');
       const weather = await getWeatherByCityName(name);
       if (weather) {
-        const template = document.getElementById('favoriteCity');
+        if (!favCards.includes(weather.name)) {
+          const template = document.getElementById('favoriteCity');
 
-        const city = document.importNode(template.content, true);
+          const city = document.importNode(template.content, true);
 
-        const el = city.children[0];
-        el.querySelector('.remove')
-            .addEventListener('click', e => removeCity(weather.name));
+          const el = city.children[0];
+          el.querySelector('.remove')
+              .addEventListener('click', e => removeCity(weather.name));
 
-        setWeather(el, weather);
-        el.setAttribute('data-city-name', weather.name);
-        favContainer.appendChild(city);
-        await addFavCity(weather.name);
-        favCards.push(weather.name);
+          setWeather(el, weather);
+          el.setAttribute('data-city-name', weather.name);
+          favContainer.appendChild(city);
+          await addFavCity(weather.name);
+          favCards.push(weather.name);
+        }
+        else {
+          alert('Город уже был добавлен');
+        }
       }
       document.getElementsByName('city')[0].value = '';
       favContainer.classList.remove('loading');
