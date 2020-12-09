@@ -51,7 +51,6 @@ function setWeather(el, weather) {
 function removeCity(name) {
   const favCardsEl = document.getElementById('favoriteCards');
   const city = favCardsEl.querySelector(`.card[data-city-name="${name}"]`);
-
   if (city !== null) {
     favCardsEl.removeChild(city);
   }
@@ -107,7 +106,7 @@ async function loadCity(name) {
 
     const el = city.children[0];
 
-    el.setAttribute('data-city-id', weather.name);
+    el.setAttribute('data-city-name', weather.name);
     el.querySelector('.remove')
         .addEventListener('click', e => removeCity(weather.name));
 
